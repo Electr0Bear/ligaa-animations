@@ -1,0 +1,63 @@
+extends ../components/base/layout-map
+
+block variables
+  - const title = "Карта 3" //- на страницах кроме главной используйте О нас — ProjectName
+  - const wrapperMods = ""
+  - const hasHeader = true
+  - const headerMods = ""
+  - const hasFooter = false
+  - const footerMods = ""
+  - const currentUrl = "map-3.html" //- для остальных страниц пишем пустую строку или индекс активного headerLinks
+
+block main
+  main
+    .map-page
+      .container
+        .content-block
+          h1.title.title--h1.map-page__title Задание по карте №3
+          p
+            strong Техническое задание
+          p Реализовать карту через API Яндекс карт
+          p Настроить кастомный пин на карте так, что бы его стрелочка четко указывала на центр координат, которые вы можете придумать сами
+          p На десктопной версии при скролле колесиком мышки, карта не должна масштабироваться. Масштабировать ее можно только при нажатии клавиши Ctrl + колесико мышки. Если пользователь навел курсор на карту и начинает скролить мышкой, то на карте должен появиться overlay с инструкцией, что для того что бы масштабировать карту нажмите Ctrl + колесико мышки
+          p Создать и расположить пины на карте из json файла. При клике на каждый пин выводить какую нибудь информацию в небольшом всплывающем окошке, которое будет появляться над пином
+          p Создать блок с фильтрами под картой и при клике на каждый элемент фильтра настроить фильтрацию пинов на карте в зависимости от выбранного фильтра
+          p Если выбран изначально фильтр "Все объекты" и открыт у кого нибудь пина баллун, то при активации фильтра этого пина у которого открыт баллун, карта должна отфильтроваться, но баллун не должен закрываться. Если у пина открыт баллун и мы выбираем другой фильтр, то баллун должен закрыться
+
+        .map-page__map-wrapper(data-map-container)
+          .map-message(data-map-message)
+            p Зажмите ctrl и крутите колесо прокрутки мышки, что бы приблизить карту
+          .map#map3(style="width: 100%; height: 700px" data-map)
+
+        .map-page__filters
+          .map-page__filters-form
+            form(action="#" data-filter-form)
+              .map-page__filters-wrapper
+                .map-page__filters-item
+                  input(id="filters-all" type="radio" data-filter="all" name="filters" value="reset" checked)
+                  label(for="filters-all")
+                    +img('map/pins', 'pin-main', 'png', 80, 80, 'иконка маркера')
+                    span Все объекты
+                .map-page__filters-item
+                  input(id="filters-1" type="radio" data-filter="1" name="filters" value="reset")
+                  label(for="filters-1")
+                    +img('map/pins', 'pin1', 'png', 80, 80, 'иконка маркера')
+                    span Достопримечательности
+                .map-page__filters-item
+                  input(id="filters-2" type="radio" data-filter="2" name="filters" value="reset")
+                  label(for="filters-2")
+                    +img('map/pins', 'pin2', 'png', 80, 80, 'иконка маркера')
+                    span Интересные места
+                .map-page__filters-item
+                  input(id="filters-3" type="radio" data-filter="3" name="filters" value="reset")
+                  label(for="filters-3")
+                    +img('map/pins', 'pin3', 'png', 80, 80, 'иконка маркера')
+                    span Какие-то места
+                .map-page__filters-item
+                  input(id="filters-4" type="radio" data-filter="4" name="filters" value="reset")
+                  label(for="filters-4")
+                    +img('map/pins', 'pin4', 'png', 80, 80, 'иконка маркера')
+                    span Магазины
+
+
+block modals

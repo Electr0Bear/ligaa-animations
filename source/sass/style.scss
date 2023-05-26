@@ -2,6 +2,15 @@
 // ---------------------------------
 
 @import "vendor/normalize";
+
+//Splitting
+@import "../../node_modules/splitting/dist/splitting";
+@import "../../node_modules/splitting/dist/splitting-cells";
+
+// Locomotive Scroll
+@import "../../node_modules/locomotive-scroll/src/locomotive-scroll";
+
+
 // Swiper 7.4.1
 // @import "vendor/swiper";
 
@@ -19,6 +28,7 @@
 // Blocks
 // ---------------------------------
 
+@import "blocks/loader";
 @import "blocks/header";
 @import "blocks/main-nav";
 @import "blocks/footer";
@@ -28,6 +38,18 @@
 @import "blocks/custom-toggle";
 @import "blocks/custom-select";
 @import "blocks/input-upload";
+@import "blocks/logo";
+@import "blocks/title";
+@import "blocks/list";
+@import "blocks/content";
+@import "blocks/intro";
+@import "blocks/section";
+@import "blocks/content-block";
+@import "blocks/card";
+@import "blocks/map";
+@import "blocks/main-page";
+@import "blocks/scroll-slider";
+@import "blocks/map-page";
 
 // ---------------------------------
 

@@ -2,35 +2,36 @@ mixin header(headerMods, currentUrl)
   -
     const headerLinks = [
       {
-        href: "index.html",
-        text: "Главная"
+        href: 'http://htmlonelove.top/liga-intern/map-1.html',
+        text: 'Карта 1'
       },
       {
-        href: "#",
-        text: "Страница 2"
+        href: 'http://htmlonelove.top/liga-intern/map-2.html',
+        text: 'Карта 2'
       },
       {
-        href: "#",
-        text: "Страница 3"
+        href: 'http://htmlonelove.top/liga-intern/map-3.html',
+        text: 'Карта 3'
+      },
+      {
+        href: 'http://htmlonelove.top/liga-intern/map-4.html',
+        text: 'Карта 4'
       },
     ]
 
-  header.header(class=headerMods)
+  header.header(class=headerMods data-menu='container' data-fix-block)
     .container
-      if(currentUrl === "index.html")
-        //- lighthouse снимает 10 баллов SEO за <a> без href
-        span.header__logo Логотип
-      else
-        a.header__logo(href="index.html", aria-label="Переход на главную") Логотип
-      nav.main-nav
-        button.main-nav__toggle.btn-reset(type="button", aria-label="Переключатель отображения меню", aria-pressed="false")
-          +icon("icon-burger", 20, 20)
+      .header__layout
+        a.logo.header__logo(href='http://htmlonelove.top/liga-intern/index.html' aria-label='Переход на главную')
+          +icon('logo', 362, 67)
+        button.header__toggle(data-menu='btn' type='button' aria-label='Переключатель отображения меню' aria-pressed='false')
+    nav.header__main-nav.main-nav(data-menu='nav' data-fix-block)
+      .container
         .main-nav__wrapper
           ul.main-nav__list
+            li.main-nav__item
+              span.main-nav__link.is-active Анимации
             each link in headerLinks
-              - const activeState = currentUrl === link.href
               li.main-nav__item
-                if(activeState)
-                  span.main-nav__link.is-active=link.text
-                else
-                  a.main-nav__link(href=link.href)=link.text
+                a.main-nav__link(href=link.href)
+                  span !{link.text}

@@ -1,0 +1,136 @@
+.loader {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: $color-night-rider;
+
+  &.is-hidden {
+    display: none;
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  &__box-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  &__box-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+    border: 1px solid $color-night-rider;
+    background-color: $color-night-rider;
+
+    &:before,
+    &:after {
+      position: absolute;
+
+      width: 40px;
+      height: 40px;
+
+      content: '';
+
+      border-radius: 50%;
+    }
+
+    &:before {
+      animation: scale-1 2500ms linear infinite;
+      opacity: 0;
+      background-color: $color-default-white;
+    }
+
+    &:after {
+      animation: scale-2 2500ms linear infinite;
+
+      background-color: $color-night-rider;
+    }
+
+    &:nth-child(2):before,
+    &:nth-child(2):after {
+      animation-delay: 300ms;
+    }
+
+    &:nth-child(3):before,
+    &:nth-child(3):after {
+      animation-delay: 600ms;
+    }
+
+    &:nth-child(4):before,
+    &:nth-child(4):after {
+      animation-delay: 900ms;
+    }
+
+    &:nth-child(5):before,
+    &:nth-child(5):after {
+      animation-delay: 1200ms;
+    }
+
+    &:nth-child(6):before,
+    &:nth-child(6):after {
+      animation-delay: 1500ms;
+    }
+
+    &:nth-child(7):before,
+    &:nth-child(7):after {
+      animation-delay: 1800ms;
+    }
+
+    &:nth-child(8):before,
+    &:nth-child(8):after {
+      animation-delay: 2100ms;
+    }
+
+    &:nth-child(9):before,
+    &:nth-child(9):after {
+      animation-delay: 2400ms;
+    }
+
+    @keyframes scale-1 {
+      0% {
+        z-index: 2;
+
+        transform: scale(0);
+        opacity: 1;
+      }
+
+      50%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes scale-2 {
+
+      0%,
+      50% {
+        transform: scale(0);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+  }
+}

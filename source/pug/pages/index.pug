@@ -1,7 +1,7 @@
 extends ../components/base/layout
 
 block variables
-  - const title = "ProjectName" //- на страницах кроме главной используйте О нас — ProjectName
+  - const title = "Анимации" //- на страницах кроме главной используйте О нас — ProjectName
   - const wrapperMods = ""
   - const hasHeader = true
   - const headerMods = ""
@@ -11,8 +11,107 @@ block variables
 
 block main
   main
-    //- на странице запрещен "голый" код
-    //- все блоки вставляются из папки pug/components/blocks
-    +intro()
+    .main-page
+      +intro()
+      section#menu.section.main-page__section
+        .container
+          .content-block.main-page__content-block
+            h2 Меню тз
+            p
+              strong Анимация появления
+            p При открытии: Сначала появляется меню, затем внутренний контент. Пункты внутри появляются с разной задержкой - эффект "лесенки"
+            p При закрытии: Внутренний контент исчезает до закрытия меню, без задержки
+            p Анимация меню на данном сайте реализована с помощью css (это база). Можете так же реализовать анимацию с помощью gsap
+            p
+              strong JS
+            p Для блокировки скролла используется window.scrollLock
+            p Должны быть реализованы функции или методы для открытия и закрытия меню, которые можно использовать в других модулях
+
+      section#loader.section.main-page__section
+        .container
+          .content-block.main-page__content-block
+            h2 Лоадер тз
+            p Анимация лоадера произвольная, можно использовать css keyframes или gsap
+            p После загрузки страницы мы всегда находимся вверху страницы (не должно быть видно скачка)
+            p Скролл страницы заблокирован во время загрузки
+
+      section#first-screen.section.main-page__section
+        .container
+          .content-block.main-page__content-block
+            h2 Сборка первого экрана тз
+            p Для анимации используйте неколько разных css свойств и небольшие задержки
+            p Для построчной или посимвольной анимации текста используйте
+              a.link splitting.js
+              | (пример: интро этого сайта)
+
+      section#show-on-scroll.section.main-page__section
+        .container
+          .content-block.main-page__content-block
+            h2 Появление блоков
+            p доскролили и вжух!
+            p Можно делать через классы и высчитывать по скроллу getBoundingClientRect каждого блока, но гораздо проще использовать ScrollTrigger.batch()
+            .content-grid-layout.content-grid-layout--2-column
+              .card.card--gainsboro.card--centered(data-animation-preset="fade")
+                p fade
+              .card.card--gainsboro.card--centered(data-animation-preset="fade")
+                p fade
+              div(data-animation-preset="fadeIn")
+                .card.card--gainsboro.card--centered(data-animation-preset="item")
+                  p fade-in
+              div(data-animation-preset="fadeIn")
+                .card.card--gainsboro.card--centered(data-animation-preset="item")
+                  p fade-in
+              div(data-animation-preset="fadeScale")
+                .card.card--gainsboro.card--centered(data-animation-preset="item")
+                  p fade-scale
+              div(data-animation-preset="fadeScale")
+                .card.card--gainsboro.card--centered(data-animation-preset="item")
+                  p fade-scale
+
+      section#parallax.section.main-page__section.main-page__section--extra-padding
+        .container
+          .content-block.main-page__content-block
+            h2 Параллакс по скроллу
+            p Эффекты, которые постоянно срабатывают по скроллу <br> Скроллим скроллим и вжух вжух вжух!
+            .content-grid-layout.content-grid-layout--2-column
+              div(data-animation-parallax="fadeScale")
+                .card.card--gainsboro.card--centered(data-animation-parallax="item")
+                  p fade-scale
+              div(data-animation-parallax="fadeScale")
+                .card.card--gainsboro.card--centered(data-animation-parallax="item")
+                  p fade-scale
+              div(data-animation-parallax="transformY")
+                .card.card--gainsboro.card--centered(data-animation-parallax="item")
+                  p transform y
+              div(data-animation-parallax="transformY" data-start="70%")
+                .card.card--gainsboro.card--centered(data-animation-parallax="item")
+                  p transform y
+
+      section#scroll-slider.section.scroll-slider.main-page__section.main-page__scroll-slider(data-scroll-slider="parent")
+        .scroll-slider__sticky
+          .scroll-slider__slide(data-scroll-slider="slide")
+            .container
+              .content-block.scroll-slider__slide-content
+                h2 Scroll Slider
+                p переключение полноэкранных слайдов по скроллу
+            .scroll-slider__slide-bg(style="background-image: url('img/svg/architect-bg.svg')")
+          .scroll-slider__slide(data-scroll-slider="slide")
+            .container
+              .content-block.scroll-slider__slide-content
+                h2 position: sticky;
+                p Просто стики. Не нужно мучаться с position: fixed; или pin: true, <br>(т.к. баги на тач неисправимы)
+            .scroll-slider__slide-bg(style="background-image: url('img/svg/squares-bg.svg')")
+          .scroll-slider__slide(data-scroll-slider="slide")
+            .container
+              .content-block.scroll-slider__slide-content
+                h2 gsap scrollTrigger
+                p без getBoundingClientRect <br>ScrollTrigger делает всю рутину за нас
+            .scroll-slider__slide-bg(style="background-image: url('img/svg/plus-bg.svg')")
+          .scroll-slider__slide(data-scroll-slider="slide")
+            .container
+              .content-block.scroll-slider__slide-content
+                h2 ios friendly???
+                p не забывайте добавлять вокруг transform: translate3d(0, 0, 0);
+            .scroll-slider__slide-bg(style="background-image: url('img/svg/graph-paper-bg.svg')")
 
 block modals

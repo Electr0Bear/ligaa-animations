@@ -1,13 +1,110 @@
 .header {
-  padding: 28px 0;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  left: 0;
 
-  background-color: $color-neon-blue;
+  width: 100%;
+  padding: 15px 0;
 
-  .container {
+  background-color: $color-transparent;
+
+  &.is-opened & {
+    &__logo {
+      color: $color-default-white;
+
+      transition: color $trans-default
+    }
+
+    &__toggle {
+      @include hover-focus {
+        &::before {
+          transform: translate3d(0, 5px, 0) rotate(-39deg);
+        }
+
+        &::after {
+          transform: translate3d(0,-6px,0) rotate(39deg);
+        }
+      }
+
+      &::before,
+      &::after {
+        background-color: $color-default-white;
+
+        transition: transform $trans-default, background-color $trans-default;
+      }
+
+      &::before {
+        transform: translate3d(0, 5px, 0) rotate(-45deg);
+      }
+
+      &::after {
+        transform: translate3d(0, -6px, 0) rotate(45deg);
+      }
+    }
+  }
+
+  &__layout {
+    position: relative;
+    z-index: 2;
+
     display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   &__logo {
-    color: $color-default-white;
+    width: 181px;
+    height: 33px;
+
+    color: $color-night-rider;
+
+    transition: color $trans-default 0.3s;
+  }
+
+  &__toggle {
+    position: relative;
+
+    width: 36px;
+    height: 40px;
+    padding: 0;
+
+    cursor: pointer;
+
+    border: 0;
+    background: 0 0;
+
+    @include hover-focus {
+      &::before {
+        transform: translate3d(-4px, 0, 0);
+      }
+
+      &::after {
+        transform: translate3d(4px, 0, 0);
+      }
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      left: 0;
+
+      width: 36px;
+      height: 2px;
+
+      content: '';
+      transition: transform $trans-default, background-color $trans-default 0.3s;
+
+      background-color: $color-night-rider;
+    }
+
+    &::before {
+      top: 13px;
+    }
+
+    &::after {
+      bottom: 13px;
+    }
   }
 }
