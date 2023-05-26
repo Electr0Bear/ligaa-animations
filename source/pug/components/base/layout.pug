@@ -33,16 +33,16 @@ html(lang="ru")
 
   body
     +sprite()
-    .wrapper(class=wrapperMods)
+    .wrapper(class=wrapperMods data-scroll-container)
       if (hasHeader)
         +header(headerMods, currentUrl)
 
       block main
 
-      if (hasFooter)
-        +footer(footerMods)
-
     block modals
+
+    block loader
+      +loader()
 
     script(src="js/vendor.min.js")
     script(src="js/main.min.js")

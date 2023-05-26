@@ -1,0 +1,27 @@
+extends ../components/base/layout-map
+
+block variables
+  - const title = "Карта 1" //- на страницах кроме главной используйте О нас — ProjectName
+  - const wrapperMods = ""
+  - const hasHeader = true
+  - const headerMods = ""
+  - const hasFooter = true
+  - const footerMods = ""
+  - const currentUrl = "map-1.html" //- для остальных страниц пишем пустую строку или индекс активного headerLinks
+
+block main
+  main
+    .map-page
+      .container
+        .content-block
+          h1.title.title--h1.map-page__title Задание по карте №1
+          p
+            strong Техническое задание
+          p Реализовать карту через API Яндекс карт
+          p Настроить кастомный пин на карте так, что бы его стрелочка четко указывала на центр координат, которые вы можете придумать сами
+          p На десктопной версии при скролле колесиком мышки, карта не должна масштабироваться.
+        .map-page__map-wrapper
+          .map#map1(style="width: 100%; height: 700px" data-map)
+
+
+block modals

@@ -3,6 +3,14 @@ import {initModals} from './modules/modals/init-modals';
 import {Form} from './modules/form-validate/form';
 import {CustomSelect} from './modules/select/custom-select';
 import {uploadFile, uploadImageDrop} from './modules/input-file/init-upload';
+import {initMenu} from './modules/init-menu';
+import {initSplitting} from './modules/init-splitting';
+import {initGSAP} from './modules/animations/init-gsap';
+import {initShowIntro} from './modules/init-show-intro';
+import {initAnimations} from './modules/animations/init-animations';
+import {initLoader} from './modules/loader/init-loader';
+import {initScrollTo} from './modules/init-scroll-to';
+import {initMaps} from './modules/maps/init-maps';
 
 // ---------------------------------
 
@@ -12,6 +20,10 @@ window.addEventListener('DOMContentLoaded', () => {
   // ---------------------------------
 
   iosVhFix();
+  initGSAP();
+  initLoader();
+  initMenu();
+  initSplitting();
 
   // Modules
   // ---------------------------------
@@ -27,6 +39,14 @@ window.addEventListener('DOMContentLoaded', () => {
     const form = new Form();
     window.form = form;
     form.init();
+
+    initScrollTo();
+    initMaps();
+  });
+
+  window.addEventListener('pageLoaded', () => {
+    initShowIntro();
+    initAnimations();
   });
 });
 
