@@ -1,12 +1,12 @@
 import {addMainMarker} from './add-main-marker';
 import {addMarkers} from './add-markers';
 import {fetchPlaces} from './fetch-places';
-
-const vp1023 = window.matchMedia('(max-width: 1023px)');
+import {resizeObserver} from './resizeObserver';
 
 export const initMap2 = async () => {
   try {
-    if (!document.querySelector('#map2')) {return}
+    const map = document.querySelector('#map2');
+    if (!map) {return}
 
     const map2 = new ymaps.Map('map2', {
       center: [55.758926, 37.641266],
@@ -15,18 +15,9 @@ export const initMap2 = async () => {
     });
 
     addMainMarker(map2);
-
     const places = await fetchPlaces();
     addMarkers(map2, places);
-
-
-    vp1023.matches ? map2.behaviors.enable('scrollZoom') : map2.behaviors.disable('scrollZoom');
-    const resizeObserver = new ResizeObserver(() => {
-      vp1023.matches ? map2.behaviors.enable('scrollZoom') : map2.behaviors.disable('scrollZoom');
-    });
-    resizeObserver.observe(document.documentElement);
-
-
+    resizeObserver(map2);
 
   } catch (error) {
     console.log(error)

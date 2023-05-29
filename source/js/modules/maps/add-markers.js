@@ -1,6 +1,5 @@
 export const addMarkers = (map, places) => {
-
-
+  let placePins = [];
 
   places.forEach(place => {
     const coordinates = [place.lat, place.lng];
@@ -39,6 +38,11 @@ export const addMarkers = (map, places) => {
     const placePin = new ymaps.Placemark(coordinates, {
       hintContent: place.name,
       balloonContent: balloonBody,
+      name: place.name,
+      text: place.text,
+      type: place.type,
+      photo: place.photo,
+      address: place.address,
     }, {
       placemarkType: place.type,
       iconLayout: 'default#image',
@@ -50,8 +54,8 @@ export const addMarkers = (map, places) => {
       balloonOffset: [0, -160],
     });
 
-    map.geoObjects.add(placePin);
+    placePins.push(placePin);
   });
 
-  map.events.add('click', e => e.get('target').balloon.close());
+  ymaps.geoQuery(placePins).addToMap(map);
 };

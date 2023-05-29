@@ -1,70 +1,122 @@
-// let ctrlIsPressed = false;
+const vp767 = window.matchMedia('(max-width: 767px)');
 
-const onMouseWheel = (e, map) => {
-  // e.preventDefault();
+let overlayIsShown;
+let timeout;
 
-  // // console.log(e);
+const hideOverlay = (mapOverlay) => {
+  if (overlayIsShown) {
+    mapOverlay.classList.remove('is-shown');
+    overlayIsShown = false;
+  }
+};
 
-  // const mapBlock = e.target.closest('[data-map-container]');
-  // const mapMessage = mapBlock.querySelector('[data-map-message]');
+const showOverlay = (mapOverlay) => {
+  mapOverlay.classList.add('is-shown');
+  clearTimeout(timeout);
+  timeout = setTimeout(() => hideOverlay(mapOverlay), 2000);
+  overlayIsShown = true;
+};
 
+const onClick = (e, mapOverlay) => {
+  overlayIsShown = true;
+  hideOverlay(mapOverlay);
+};
 
-  // console.log(map);
+const onMouseWheel = (e, mapOverlay, mapObject) => {
+  mapObject.behaviors.get('scrollZoom')._behaviorEnabled ? hideOverlay(mapOverlay) : showOverlay(mapOverlay);
+};
 
+const onCtrlPress = (mapOverlay, mapObject, e) => {
+  if (e.key === 'Control') {
+    mapOverlay.classList.remove('is-shown');
+    mapObject.behaviors.enable('scrollZoom');
+  }
+};
 
-  // if (!ctrlIsPressed) {
-  //   mapMessage.classList.add('is-shown');
-  //   map.behaviors.disable('scrollZoom');
+const onCtrlRelease = (mapOverlay, mapObject, e) => {
+  if (e.key === 'Control') {
+    mapObject.behaviors.disable('scrollZoom');
+  }
+};
 
+const onMouseEnter = (e, mapContainer, mapObject) => {
+  const mapOverlay = mapContainer.querySelector('[data-map-message]');
 
-  // } else {
-  //   mapMessage.classList.remove('is-shown');
-  //   map.behaviors.enable('scrollZoom');
+  mapContainer.addEventListener('wheel', (evt) => onMouseWheel(evt, mapOverlay, mapObject));
+  mapContainer.addEventListener('click', (evt) => onClick(evt, mapOverlay));
+  document.addEventListener('keydown', onCtrlPress.bind(document, mapOverlay, mapObject));
+  document.addEventListener('keyup', onCtrlRelease.bind(document, mapOverlay, mapObject));
+};
 
-  // }
-}
+const onMouseLeave = (e, mapContainer, mapObject) => {
+  const mapOverlay = mapContainer.querySelector('[data-map-message]');
 
-const onCtrlPress = (e) => {
+  overlayIsShown = true;
+  hideOverlay(mapOverlay);
 
-  // if (e.key === 'Control') {
-  //   console.log('ctrl pressed');
-  //   ctrlIsPressed = true;
-  // }
-}
+  mapContainer.removeEventListener('wheel', (evt) => onMouseWheel(evt, mapOverlay, mapObject));
+  mapContainer.removeEventListener('click', (evt) => onClick(evt, mapOverlay));
+  document.removeEventListener('keydown', onCtrlPress.bind(document, mapOverlay, mapObject));
+  document.removeEventListener('keyup', onCtrlRelease.bind(document, mapOverlay, mapObject));
+};
 
-const onCtrlRelease = (e) => {
+export const zoomHandler = (mapObject) => {
+  try {
+    if (vp767.matches) {return}
 
-  // if (e.key === 'Control') {
-  //   console.log('ctrl up');
-  //   ctrlIsPressed = false;
-  // }
-}
+    const mapContainer = document.querySelector('[data-map-container]');
+    const mapMessage = mapContainer.querySelector('[data-map-message]');
 
-const onMouseEnter = (e, block) => {
-  // console.log('enter');
-  // block.addEventListener('wheel', (evt) => onMouseWheel(evt, block));
-  // window.addEventListener('keydown', onCtrlPress);
-  // window.addEventListener('keyup', onCtrlRelease);
-}
+    if (!mapContainer || !mapMessage) {return}
 
-const onMouseLeave = (e, block) => {
-  // console.log('leave');
-  // block.removeEventListener('wheel', (evt) => onMouseWheel(evt, block));
-  // window.removeEventListener('keydown', onCtrlPress);
-  // window.removeEventListener('keyup', onCtrlRelease);
-}
+    mapContainer.addEventListener('mouseenter', (e) => onMouseEnter(e, mapContainer, mapObject));
+    mapContainer.addEventListener('mouseleave', (e) => onMouseLeave(e, mapContainer, mapObject));
 
-export const zoomHandler = (map) => {
-  // try {
-  //   const mapContainer = document.querySelector('[data-map-container]');
-  //   const mapMessage = mapContainer.querySelector('[data-map-message]');
+  } catch (error) {
+    console.log(error);
+  }
 
-  //   if (!mapMessage) {return}
+  // const mapContainer = document.querySelector('[data-map-container]'),
+  //       mapMessage = mapContainer.querySelector('[data-map-message]');
 
-  //   mapContainer.addEventListener('mouseenter', (e) => onMouseEnter(e, map));
-  //   mapContainer.addEventListener('mouseleave', (e) => onMouseLeave(e, map));
+  // if (!mapContainer || !mapMessage) {return}
 
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  // const events = ['mouseenter', 'mouseleave', 'wheel'];
+
+  // const zoomEvents = ymaps.domEvent.manager.group(mapObject)
+  //     .add(events, event => {
+  //       // console.log(event);
+  //       // console.log(event.get('type'));
+
+  //       console.log(mapObject.behaviors);
+
+  //       if (event.get('type') === 'mouseenter') {
+  //         window.addEventListener('keydown', (e) => {
+  //           if (e.key === 'Control') {
+  //             mapOverlay.classList.remove('is-shown');
+  //             map3.behaviors.enable('scrollZoom');
+  //           }
+  //         });
+
+  //         window.addEventListener('keyup', (e) => {
+  //           if (e.key === 'Control') {
+  //             map3.behaviors.disable('scrollZoom');
+  //           }
+  //         });
+  //       }
+
+  //       if (event.get('type') === 'wheel') {
+
+  //         const zoomEnabled = map3.behaviors.get('scrollZoom')._behaviorEnabled;
+
+  //         if (zoomEnabled) {
+  //           console.log('enabled');
+
+  //           mapOverlay.classList.remove('is-shown');
+  //         } else {
+  //           console.log('disabled')
+  //           mapOverlay.classList.add('is-shown');
+  //         }
+  //       }
+  //     });
 };
