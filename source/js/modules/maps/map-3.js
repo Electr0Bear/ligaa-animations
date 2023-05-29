@@ -28,53 +28,7 @@ export const initMap3 = async () => {
     filterForm.addEventListener('change', (e) => filterHandler(e, map3));
     zoomHandler(map3);
 
-    // const events = ['mouseenter', 'mouseleave', 'wheel'];
-
-    // ymaps.domEvent.manager.group(map)
-    //   .add(events, event => {
-    //       // console.log(event);
-    //       // console.log(event.get('type'));
-
-    //       console.log(map3.behaviors);
-
-    //       if (event.get('type') === 'mouseenter') {
-    //         window.addEventListener('keydown', (e) => {
-    //           if (e.key === 'Control') {
-    //             mapOverlay.classList.remove('is-shown');
-    //             map3.behaviors.enable('scrollZoom');
-    //           }
-    //         });
-
-    //         window.addEventListener('keyup', (e) => {
-    //           if (e.key === 'Control') {
-    //             map3.behaviors.disable('scrollZoom');
-    //           }
-    //         });
-    //       }
-
-    //       if (event.get('type') === 'wheel') {
-
-    //         const zoomEnabled = map3.behaviors.get('scrollZoom')._behaviorEnabled;
-
-    //         if (zoomEnabled) {
-    //           console.log('enabled');
-
-    //           mapOverlay.classList.remove('is-shown');
-    //         } else {
-    //           console.log('disabled')
-    //           mapOverlay.classList.add('is-shown');
-    //         }
-    //       }
-    //   });
-
-    // ymaps.domEvent.manager
-    //   .add(map, 'keydown', function (event) {
-    //       // событие 'click'.
-    //       console.log(event.get('type'));
-    //   })
-
   } catch (error) {
     console.log(error)
   }
-
 };
