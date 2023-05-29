@@ -2,19 +2,19 @@ mixin header(headerMods, currentUrl)
   -
     const headerLinks = [
       {
-        href: 'http://htmlonelove.top/liga-intern/map-1.html',
+        href: 'map-1.html',
         text: 'Карта 1'
       },
       {
-        href: 'http://htmlonelove.top/liga-intern/map-2.html',
+        href: 'map-2.html',
         text: 'Карта 2'
       },
       {
-        href: 'http://htmlonelove.top/liga-intern/map-3.html',
+        href: 'map-3.html',
         text: 'Карта 3'
       },
       {
-        href: 'http://htmlonelove.top/liga-intern/map-4.html',
+        href: 'map-4.html',
         text: 'Карта 4'
       },
     ]
@@ -22,7 +22,7 @@ mixin header(headerMods, currentUrl)
   header.header(class=headerMods data-menu='container' data-fix-block)
     .container
       .header__layout
-        a.logo.header__logo(href='http://htmlonelove.top/liga-intern/index.html' aria-label='Переход на главную')
+        a.logo.header__logo(href='index.html' aria-label='Переход на главную')
           +icon('logo', 362, 67)
         button.header__toggle(data-menu='btn' type='button' aria-label='Переключатель отображения меню' aria-pressed='false')
     nav.header__main-nav.main-nav(data-menu='nav' data-fix-block)
@@ -30,8 +30,8 @@ mixin header(headerMods, currentUrl)
         .main-nav__wrapper
           ul.main-nav__list
             li.main-nav__item
-              span.main-nav__link.is-active Анимации
+              a.main-nav__link.is-active(href="index.html" data-menu='link') Анимации
             each link in headerLinks
               li.main-nav__item
-                a.main-nav__link(href=link.href)
+                a.main-nav__link(href=link.href data-menu='link')
                   span !{link.text}

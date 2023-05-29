@@ -1,7 +1,7 @@
 extends ../components/base/layout-map
 
 block variables
-  - const title = "Карта 3" //- на страницах кроме главной используйте О нас — ProjectName
+  - const title = "Карта 4" //- на страницах кроме главной используйте О нас — ProjectName
   - const wrapperMods = ""
   - const hasHeader = true
   - const headerMods = ""
@@ -25,9 +25,9 @@ block main
           p При клике на кластер должно раскрываться окошко, в котором будет списком указаны, какие пини находятся в этой кластере
 
         .map-page__map-wrapper(data-map-container)
+          .map#map4(style="width: 100%; height: 700px" data-map)
           .map-message(data-map-message)
             p Зажмите ctrl и крутите колесо прокрутки мышки, что бы приблизить карту
-          .map#map4(style="width: 100%; height: 700px" data-map)
 
 
 block modals

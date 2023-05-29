@@ -1,7 +1,6 @@
 const URL = 'img/map/places.json';
 
 export const fetchPlaces = async () => {
-  // let places;
   let places = await fetch(URL)
       .then((response) => response.json())
       .then((data) => {
