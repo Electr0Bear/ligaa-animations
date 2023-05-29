@@ -5,6 +5,7 @@ const SELECTORS = {
   menuBtn: '[data-menu="btn"]',
   menuContainer: '[data-menu="container"]',
   menuNav: '[data-menu="nav"]',
+  menuLink: '[data-menu="link"]',
 };
 
 const scrollLock = new ScrollLock();
@@ -16,6 +17,7 @@ const onBtnClick = (e) => {
     const btn = e.target.closest(SELECTORS.menuBtn);
     const container = e.currentTarget;
     const nav = container.querySelector(SELECTORS.menuNav);
+    const links = Array.from(document.querySelectorAll(SELECTORS.menuLink));
 
     container.classList.toggle('is-opened');
     btn.classList.toggle('is-active');
@@ -26,6 +28,11 @@ const onBtnClick = (e) => {
 
     } else {
       scrollLock.enableScrolling();
+    }
+
+    if (links.length) {
+      links.forEach(link => link.classList.remove('is-active'));
+      links.map(link => link.getAttribute('href') === location.pathname.split('/').slice(-1).pop() ? link.classList.add('is-active') : '');
     }
 
   } catch (error) {
